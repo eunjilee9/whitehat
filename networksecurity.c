@@ -60,7 +60,7 @@ void got_packet(u_char *args, const struct pcap_pkthdr *header,
                            (packet + sizeof(struct ethheader)); 
     int ip_header_len = ip->iph_ihl * 4;
     struct tcpheader * tcp = (struct tcpheader *) (packet + sizeof(struct ethheader) + ip_header_len);
-    printf("------------------------------------------");
+    printf("-----------------------------------\n");
     printf("ethernet header\n");
     printf("       From: %02x:%02x:%02x:%02x:%02x:%02x\n", eth->ether_shost[0], eth->ether_shost[1], eth->ether_shost[2], eth->ether_shost[3], eth->ether_shost[4], eth->ether_shost[5]);
     printf("         To: %02x:%02x:%02x:%02x:%02x:%02x\n", eth->ether_dhost[0], eth->ether_dhost[1], eth->ether_dhost[2], eth->ether_dhost[3], eth->ether_dhost[4], eth->ether_dhost[5]);
