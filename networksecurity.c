@@ -60,10 +60,14 @@ void got_packet(u_char *args, const struct pcap_pkthdr *header,
                            (packet + sizeof(struct ethheader)); 
     int ip_header_len = ip->iph_ihl * 4;
     struct tcpheader * tcp = (struct tcpheader *) (packet + sizeof(struct ethheader) + ip_header_len);
-
-
+    printf("------------------------------------------");
+    printf("ethernet header\n");
+    printf("       From: %02x:%02x:%02x:%02x:%02x:%02x\n", eth->ether_shost[0], eth->ether_shost[1], eth->ether_shost[2], eth->ether_shost[3], eth->ether_shost[4], eth->ether_shost[5]);
+    printf("         To: %02x:%02x:%02x:%02x:%02x:%02x\n", eth->ether_dhost[0], eth->ether_dhost[1], eth->ether_dhost[2], eth->ether_dhost[3], eth->ether_dhost[4], eth->ether_dhost[5]);
+    printf("ip header\n");
     printf("       From: %s\n", inet_ntoa(ip->iph_sourceip));   
     printf("         To: %s\n", inet_ntoa(ip->iph_destip));    
+    printf("tcp header\n");
     printf("       From: %d\n", tcp->tcp_sport);
     printf("         To: %d\n", tcp->tcp_dport);
 
@@ -71,16 +75,16 @@ void got_packet(u_char *args, const struct pcap_pkthdr *header,
     /* determine protocol */
     switch(ip->iph_protocol) {                                 
         case IPPROTO_TCP:
-            printf("   Protocol: TCP\n");
+            printf("Protocol: TCP\n");
             return;
         case IPPROTO_UDP:
-            printf("   Protocol: UDP\n");
+            printf("Protocol: UDP\n");
             return;
         case IPPROTO_ICMP:
-            printf("   Protocol: ICMP\n");
+            printf("Protocol: ICMP\n");
             return;
         default:
-            printf("   Protocol: others\n");
+            printf("Protocol: others\n");
             return;
     }
   }
